@@ -1,0 +1,2 @@
+class StockQuoteException(Exception):
+  pass
