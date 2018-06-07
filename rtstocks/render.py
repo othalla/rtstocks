@@ -1,7 +1,7 @@
 from typing import List
 from tabulate import tabulate
 from rtstocks.stock import Stock
-from rtstocks.exchanges.IEX import IEX
+from rtstocks.exchanges.iex import IEX
 from rtstocks.exceptions import StockQuoteException
 
 
