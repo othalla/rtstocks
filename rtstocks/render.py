@@ -9,7 +9,9 @@ def stocks_datas(stocks: list, stock_provider=Stock) -> List[list]:
     result = []
     for stock in stocks:
         try:
-            result.append(stock_provider(stock, IEX).quote())
+            quote = stock_provider(stock).quote()
+            result.append([quote.symbol, quote.latest_source,
+                           quote.latest_price])
         except StockQuoteException:
             result.append([stock, '---', '---'])
     return result

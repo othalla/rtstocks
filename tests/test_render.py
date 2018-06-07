@@ -1,4 +1,5 @@
 from unittest.mock import Mock
+from rtstocks.quote import Quote
 from rtstocks.render import print_table, stocks_datas
 from rtstocks.exceptions import StockQuoteException
 
@@ -19,12 +20,13 @@ def test_show_table_from_data():
 
 def test_return_stocks_data_from_stocks():
     stock = Mock(name='Stock')
-    stock.return_value.quote.side_effect = [['AAPL', 158.73, 'Previous close'],
-                                            ['AMZN', 1158.7, 'Previous close']]
+    stock.return_value.quote.side_effect = [
+        Quote('AAPL', 'Previous close', 150),
+        Quote('AMZN', 'Previous close', 100)]
     datas = stocks_datas(['AMZN', 'AAPL'], stock_provider=stock)
     assert stock.return_value.quote.call_count == 2
-    assert datas == [['AAPL', 158.73, 'Previous close'],
-                     ['AMZN', 1158.7, 'Previous close']]
+    assert datas == [['AAPL', 'Previous close', 150],
+                     ['AMZN', 'Previous close', 100]]
 
 
 def test_return_blank_data_with_stock_quote_exception():
