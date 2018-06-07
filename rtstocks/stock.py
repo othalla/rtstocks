@@ -1,3 +1,6 @@
+from rtstocks.quote import Quote
+from rtstocks.exchanges.base import Exchange
+from rtstocks.exchanges.iex import IEX
 from rtstocks.exceptions import StockQuoteException, ExchangeException
 
 
@@ -6,9 +9,10 @@ class Stock:
         self._stock = stock
         self._exchange_provider = exchange_provider
 
-    def quote(self) -> list:
+    @staticmethod
+    def quote(stock: str, exchange_provider: Exchange = IEX) -> Quote:
         try:
-            data = self._exchange_provider(self._stock).quote()
+            quote = exchange_provider.quote(stock)
         except ExchangeException:
             raise StockQuoteException
-        return data
+        return quote
