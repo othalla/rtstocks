@@ -20,18 +20,18 @@ def test_show_table_from_data():
 
 def test_return_stocks_data_from_stocks():
     stock = Mock(name='Stock')
-    stock.return_value.quote.side_effect = [
+    stock.quote.side_effect = [
         Quote('AAPL', 'Previous close', 150),
         Quote('AMZN', 'Previous close', 100)]
     datas = stocks_datas(['AMZN', 'AAPL'], stock_provider=stock)
-    assert stock.return_value.quote.call_count == 2
+    assert stock.quote.call_count == 2
     assert datas == [['AAPL', 'Previous close', 150],
                      ['AMZN', 'Previous close', 100]]
 
 
 def test_return_blank_data_with_stock_quote_exception():
     stock = Mock(name='Stock')
-    stock.return_value.quote.side_effect = StockQuoteException
+    stock.quote.side_effect = StockQuoteException
     datas = stocks_datas(['AMZN'], stock_provider=stock)
-    assert stock.return_value.quote.call_count == 1
+    assert stock.quote.call_count == 1
     assert datas == [['AMZN', '---', '---']]
