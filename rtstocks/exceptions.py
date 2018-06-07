@@ -1,5 +1,14 @@
 class StockQuoteException(Exception):
-  pass
+    pass
+
 
 class ExchangeException(Exception):
-  pass
+    pass
+
+
+class UnknowStockException(ExchangeException):
+    pass
+
+
+class IEXExchangeException(ExchangeException):
+    pass

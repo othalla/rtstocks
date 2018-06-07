@@ -2,7 +2,7 @@ from typing import Callable
 import requests
 from rtstocks.quote import Quote
 from rtstocks.exchanges.base import Exchange
-from rtstocks.exceptions import IEXExchangeException
+from rtstocks.exceptions import UnknowStockException, IEXExchangeException
 
 
 IEX_API_URL = "https://api.iextrading.com/1.0"
@@ -16,4 +16,7 @@ class IEX(Exchange):
             data = response.json()
             return Quote(data['symbol'], data['latestSource'],
                          data['latestPrice'])
-        raise Exception
+        elif response.status_code == 404:
+            raise UnknowStockException
+        else:
+            raise IEXExchangeException
