@@ -1,9 +1,9 @@
 import sys
-from rtstocks.render import stocks_datas, print_table
+from rtstocks.render import stocks_datas, table
 
 
 if __name__ == "__main__":
     stocks = sys.argv[1:]
-    print_table(['Symbol', 'LatestSource', 'LatestPrice'],
-                stocks_datas(stocks))
+    print(table(['Symbol', 'LatestSource', 'LatestPrice'],
+                stocks_datas(stocks)))
 

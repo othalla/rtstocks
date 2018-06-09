@@ -19,7 +19,4 @@ def stocks_datas(stocks: list, stock_provider=Stock) -> List[list]:
 
 def table(headers: list, stocks_data: List[list],
           table_builder=tabulate) -> None:
-    table = table_builder(stocks_data,
-                          headers=headers,
-                          tablefmt='grid')
-    print(table)
+    return table_builder(stocks_data, headers=headers, tablefmt='grid')
