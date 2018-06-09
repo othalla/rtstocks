@@ -6,3 +6,6 @@
 
 # vim swap files
 *.swp
+
+# egg
+rtstocks.egg-info/
