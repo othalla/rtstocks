@@ -1,21 +1,19 @@
 from unittest.mock import Mock
 from rtstocks.quote import Quote
-from rtstocks.render import print_table, stocks_datas
+from rtstocks.render import table, stocks_datas
 from rtstocks.exceptions import StockQuoteException
 
 
 def test_show_table_from_data():
-    table = Mock(name='tabulate')
-    print_table(['symbol', 'latestPrice', 'latestSource'],
-                [['AAPL', 158.73, 'Previous close'],
-                 ['AMZN', 1158.73, 'Previous close']],
-                table_builder=table)
-    table.assert_called_once_with(
+    tab = Mock(name='tabulate')
+    table(['symbol', 'latestPrice', 'latestSource'],
+          [['AAPL', 158.73, 'Previous close'],
+           ['AMZN', 1158.73, 'Previous close']],
+          table_builder=tab)
+    tab.assert_called_once_with(
         [['AAPL', 158.73, 'Previous close'],
          ['AMZN', 1158.73, 'Previous close']],
-        headers=['symbol', 'latestPrice', 'latestSource'],
-        tablefmt='grid')
-    table.assert_called_once()
+        headers=['symbol', 'latestPrice', 'latestSource'], tablefmt='grid')
 
 
 def test_return_stocks_data_from_stocks():

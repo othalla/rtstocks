@@ -17,8 +17,8 @@ def stocks_datas(stocks: list, stock_provider=Stock) -> List[list]:
     return result
 
 
-def print_table(headers: list, stocks_data: List[list],
-                table_builder=tabulate) -> None:
+def table(headers: list, stocks_data: List[list],
+          table_builder=tabulate) -> None:
     table = table_builder(stocks_data,
                           headers=headers,
                           tablefmt='grid')
